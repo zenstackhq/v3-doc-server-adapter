@@ -6,6 +6,7 @@
     "dev": "tsx main.ts"
   },
   "devDependencies": {
+    "@types/express": "^5.0.5",
     "@types/node": "^24.1.0",
     "@types/sql.js": "^1.4.9",
     "@zenstackhq/cli": "next",
@@ -15,6 +16,7 @@
   "dependencies": {
     "@zenstackhq/kysely-sql-js": "next",
     "@zenstackhq/runtime": "next",
+    "express": "^5.1.0",
     "sql.js": "^1.13.0"
   }
 }
