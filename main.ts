@@ -27,6 +27,7 @@ async function main() {
       });
       res.json(users);
     } catch (error) {
+      console.error('Error fetching users:', error);
       res.status(500).json({ error: 'Failed to fetch users' });
     }
   });
@@ -39,6 +40,7 @@ async function main() {
       });
       res.json(posts);
     } catch (error) {
+      console.error('Error fetching posts:', error);
       res.status(500).json({ error: 'Failed to fetch posts' });
     }
   });
@@ -46,8 +48,14 @@ async function main() {
   // Get post by id
   app.get('/api/posts/:id', async (req, res) => {
     try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id) || id < 1) {
+        res.status(400).json({ error: 'Invalid post ID' });
+        return;
+      }
+      
       const post = await db.post.findUnique({
-        where: { id: parseInt(req.params.id) },
+        where: { id },
         include: { author: true }
       });
       if (!post) {
@@ -56,6 +64,7 @@ async function main() {
         res.json(post);
       }
     } catch (error) {
+      console.error('Error fetching post:', error);
       res.status(500).json({ error: 'Failed to fetch post' });
     }
   });
