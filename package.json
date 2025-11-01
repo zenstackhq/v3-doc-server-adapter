@@ -4,7 +4,7 @@
   "scripts": {
     "generate": "zen generate",
     "dev": "tsx main.ts",
-    "client": "./client-test.sh"
+    "client": "sh ./client-test.sh"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
