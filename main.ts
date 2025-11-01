@@ -16,10 +16,15 @@ createClient().then(_client => {
 
 app.use(express.json());
 
+// install ZenStack's CRUD service at "/api/model"
 app.use(
   '/api/model',
   ZenStackMiddleware({
+    // use RPC API handler
     apiHandler: new RPCApiHandler({ schema }),
+
+    // `getClient` is called for each request to get a proper
+    // ORM client instance
     getClient: (request) => getClient(request),
   })
 );
