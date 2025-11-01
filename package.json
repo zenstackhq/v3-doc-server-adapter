@@ -3,9 +3,11 @@
   "private": true,
   "scripts": {
     "generate": "zen generate",
-    "dev": "tsx main.ts"
+    "dev": "tsx main.ts",
+    "client": "./client-test.sh"
   },
   "devDependencies": {
+    "@types/express": "^5.0.5",
     "@types/node": "^24.1.0",
     "@types/sql.js": "^1.4.9",
     "@zenstackhq/cli": "next",
@@ -14,7 +16,10 @@
   },
   "dependencies": {
     "@zenstackhq/kysely-sql-js": "next",
-    "@zenstackhq/runtime": "next",
+    "@zenstackhq/orm": "next",
+    "@zenstackhq/plugin-policy": "^3.0.0-beta.14",
+    "@zenstackhq/server": "^3.0.0-beta.14",
+    "express": "^5.1.0",
     "sql.js": "^1.13.0"
   }
 }

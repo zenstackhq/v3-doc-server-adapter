@@ -1,13 +1,6 @@
-import { ClientContract } from "@zenstackhq/runtime";
+import { ClientContract } from "@zenstackhq/orm";
 import { SchemaType } from "./zenstack/schema";
-
-export function createPosts(db: ClientContract<SchemaType>) {
-  return db.post.createMany({
-    data: [ 
-      { id: 1, title: 'Post1', slug: 'post1', content: 'First post' },
-      { id: 2, title: 'Post2', slug: 'post2', published: true, viewCount: 1 },
-  ]})
-}
+import { inspect } from "util";
 
 export async function createUsersAndPosts(db: ClientContract<SchemaType>) {
     // user1 with 1 post
@@ -17,10 +10,11 @@ export async function createUsersAndPosts(db: ClientContract<SchemaType>) {
             email: 'u1@test.com',
             posts: {
                 create: [
-                    { id: 1, title: 'Post1', content: 'First post', slug: 'post1' },
+                    { id: 1, title: 'Post1' },
                 ]
             }
-        }
+        },
+        include: { posts: true }
     });
 
     // user2 with two posts
@@ -30,13 +24,11 @@ export async function createUsersAndPosts(db: ClientContract<SchemaType>) {
             email: 'u2@test.com',
             posts: {
                 create: [
-                    { id: 2, title: 'Post2', slug: 'post2', viewCount: 2 },
-                    { id: 3, title: 'Post3', slug: 'post3', published: true, viewCount: 1 },
+                    { id: 2, title: 'Post2' },
+                    { id: 3, title: 'Post3', published: true },
                 ]
             }
-        }
+        },
+        include: { posts: true }
     });
-
-    // a post not owned by any user
-    await db.post.create({ data: { id: 4, title: 'Post4', slug: 'post4', viewCount: 3 }});
 }

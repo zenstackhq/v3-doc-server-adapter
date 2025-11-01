@@ -1,7 +1,9 @@
-// This is a sample model to get you started.
-
 datasource db {
     provider = 'sqlite'
+}
+
+plugin policy {
+    provider = '@zenstackhq/plugin-policy'
 }
 
 /// User model
@@ -9,6 +11,12 @@ model User {
     id       Int    @id @default(autoincrement())
     email    String @unique
     posts    Post[]
+
+    // everybody can signup, profiles are public
+    @@allow('create,read', true)
+
+    // user himself has full access
+    @@allow('all', auth() == this)
 }
 
 /// Post model
@@ -17,10 +25,16 @@ model Post {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     title     String
-    content   String?
-    slug      String?  @unique
-    viewCount Int      @default(0)
     published Boolean  @default(false)
     author    User?    @relation(fields: [authorId], references: [id])
     authorId  Int?
+
+    // no anonymous access
+    @@deny('all', auth() == null)
+
+    // published posts are readable to all
+    @@allow('read', published)
+
+    // author has full access
+    @@allow('all', auth() == author)
 }
