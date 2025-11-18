@@ -4,21 +4,21 @@
   "scripts": {
     "generate": "zen generate",
     "dev": "tsx main.ts",
-    "client": "sh ./client-test.sh"
+    "client": "sh ./client-test.sh",
+    "up": "npm i @zenstackhq/cli@next @zenstackhq/orm@next @zenstackhq/plugin-policy@next @zenstackhq/server@next"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
     "@types/node": "^24.1.0",
     "@types/sql.js": "^1.4.9",
-    "@zenstackhq/cli": "^3.0.0-beta.19",
+    "@zenstackhq/cli": "^3.0.0-beta.24",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@zenstackhq/kysely-sql-js": "^3.0.0-beta.19",
-    "@zenstackhq/orm": "^3.0.0-beta.19",
-    "@zenstackhq/plugin-policy": "^3.0.0-beta.19",
-    "@zenstackhq/server": "^3.0.0-beta.19",
+    "@zenstackhq/orm": "^3.0.0-beta.24",
+    "@zenstackhq/plugin-policy": "^3.0.0-beta.24",
+    "@zenstackhq/server": "^3.0.0-beta.24",
     "express": "^5.1.0",
     "sql.js": "^1.13.0"
   }
